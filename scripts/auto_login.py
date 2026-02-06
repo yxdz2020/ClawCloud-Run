@@ -310,7 +310,7 @@ class AutoLogin:
 用户{self.username}正在登录，请在 {DEVICE_VERIFY_WAIT} 秒内批准：
 1️⃣ 检查邮箱点击链接
 2️⃣ 或在 GitHub App 批准
-3️⃣ 或在 Telegram 发送<code> /code </code>""")
+3️⃣ 或在 Telegram 发送<code>/code</code>""")
         
         if self.shots:
             self.tg.photo(self.shots[-1], "设备验证页面")
@@ -349,7 +349,8 @@ class AutoLogin:
                             m = code_pattern.match(text)
                             if m:
                                 code = m.group(1)
-                                self.log(f"收到验证码: {code}", "SUCCESS")
+                                # === 修改点：隐藏验证码明文 ===
+                                self.log("收到验证码: ******", "SUCCESS")
                                 self.tg.send("✅ 收到验证码，正在填入...")
                                 
                                 # 尝试寻找输入框填入
